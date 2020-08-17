@@ -3,7 +3,10 @@ package daos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import models.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
@@ -14,19 +17,22 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     super();
   }
 
-  public void cadastrar(Usuario u) throws SQLException {
+  public void cadastrar(Usuario u) throws SQLException, ParseException {
     String query = "INSERT INTO Usuarios (nome,sexo,cpf,data_nascimento,telefone,email,senha,tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String hashed = BCrypt.hashpw(u.getSenha(), BCrypt.gensalt());
 
+    Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(u.getDataNascimento());
+    java.sql.Date dataSql = new java.sql.Date(dataNascimento.getTime());
+
     PreparedStatement st = con.prepareStatement(query);
     st.setString(1, u.getNome());
-    st.setString(2, u.getSexo());
+    st.setInt(2, u.getSexo());
     st.setString(3, u.getCpf());
-    st.setString(4, u.getDataNascimento());
+    st.setDate(4, dataSql);
     st.setString(5, u.getTelefone());
     st.setString(6, u.getEmail());
     st.setString(7, hashed);
-    st.setString(8, u.getTipoUsuario());
+    st.setInt(8, u.getTipoUsuario());
     st.execute();
     st.close();
 
@@ -41,13 +47,13 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     return buscar(st);
   }
 
-  public List<Usuario> listar(int id) throws SQLException {
+  public Usuario listar(int id) throws SQLException {
     String query = "SELECT * FROM Usuarios WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
     st.setInt(1, id);
 
-    return buscar(st);
+    return buscar(st).get(0);
   }
 
   public void excluir(int id) throws SQLException {
@@ -60,17 +66,20 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     con.close();
   }
 
-  public void atualizar(int id, Usuario u) throws SQLException {
+  public void atualizar(int id, Usuario u) throws SQLException, ParseException {
     String query = "UPDATE Usuarios SET nome=?,sexo=?,cpf=?,data_nascimento=?,telefone=?,email=?,tipo_usuario=? WHERE id = ?";
+
+    Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(u.getDataNascimento());
+    java.sql.Date dataSql = new java.sql.Date(dataNascimento.getTime());
 
     PreparedStatement st = con.prepareStatement(query);
     st.setString(1, u.getNome());
-    st.setString(2, u.getSexo());
+    st.setInt(2, u.getSexo());
     st.setString(3, u.getCpf());
-    st.setString(4, u.getDataNascimento());
+    st.setDate(4, dataSql);
     st.setString(5, u.getTelefone());
     st.setString(6, u.getEmail());
-    st.setString(7, u.getTipoUsuario());
+    st.setInt(7, u.getTipoUsuario());
     st.setInt(8, id);
     st.executeUpdate();
 
@@ -86,12 +95,12 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
 
       u.setId(rs.getInt("id"));
       u.setNome(rs.getString("nome"));
-      u.setSexo(rs.getString("sexo"));
+      u.setSexo(rs.getInt("sexo"));
       u.setCpf(rs.getString("cpf"));
       u.setDataNascimento(rs.getString("data_nascimento"));
       u.setTelefone(rs.getString("telefone"));
       u.setEmail(rs.getString("email"));
-      u.setTipoUsuario(rs.getString("tipo_usuario"));
+      u.setTipoUsuario(rs.getInt("tipo_usuario"));
 
       lista.add(u);
     }

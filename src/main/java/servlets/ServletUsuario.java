@@ -11,104 +11,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Usuario;
+import utils.ServletCRUD;
 
 public class ServletUsuario extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
+    ServletCRUD<Usuario, UsuarioDAO> crud = new ServletCRUD<Usuario, UsuarioDAO>(Usuario.class, new UsuarioDAO());
 
-    PrintWriter output = resp.getWriter();
-    Gson parser = new Gson();
-    UsuarioDAO udao = new UsuarioDAO();
-    List<Usuario> list = new ArrayList<Usuario>();
-    String response = "";
-
-    try {
-      if (req.getParameter("id") != null) {
-          list = udao.listar(Integer.parseInt(req.getParameter("id")));
-          response = parser.toJson(list.get(0));
-      } else {
-          list = udao.listar();
-          response = parser.toJson(list);
-      }
+    if (req.getParameter("id") != null) {
+      crud.show(req, resp);
+    } else {
+      crud.index(req, resp);
     }
-    catch (SQLException e) {
-      response = e.getMessage();
-    }
-
-    output.println(response);
-    output.flush();
-    output.close();
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
-
-    PrintWriter output = resp.getWriter();
-    Gson parser = new Gson();
-    UsuarioDAO udao = new UsuarioDAO();
-    Usuario u = parser.fromJson(req.getReader(), Usuario.class);
-    String response = "";
-
-    try {
-      udao.cadastrar(u);
-      response = parser.toJson(u);
-    }
-    catch (SQLException e) {
-      response = e.getMessage();
-    }
-
-    output.println(response);
-    output.flush();
-    output.close();
+    ServletCRUD<Usuario, UsuarioDAO> crud = new ServletCRUD<Usuario, UsuarioDAO>(Usuario.class, new UsuarioDAO());
+    crud.create(req, resp);
   }
 
   @Override
   protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
-
-    PrintWriter output = resp.getWriter();
-    UsuarioDAO udao = new UsuarioDAO();
-    String response = "";
-
-    try {
-      udao.excluir(Integer.parseInt(req.getParameter("id")));
-      response = "Usuário excluido com sucesso";
-    }
-    catch (SQLException e) {
-      response = e.getMessage();
-    }
-
-    output.println(response);
-    output.flush();
-    output.close();
+    ServletCRUD<Usuario, UsuarioDAO> crud = new ServletCRUD<Usuario, UsuarioDAO>(Usuario.class, new UsuarioDAO());
+    crud.destroy(req, resp);
   }
 
   @Override
   protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
-
-    PrintWriter output = resp.getWriter();
-    Gson parser = new Gson();
-    UsuarioDAO udao = new UsuarioDAO();
-    Usuario u = parser.fromJson(req.getReader(), Usuario.class);
-    String response = "";
-
-    try {
-      udao.atualizar(Integer.parseInt(req.getParameter("id")), u);
-      response = parser.toJson(u);
-    }
-    catch (SQLException e) {
-      response = e.getMessage();
-    }
-
-    output.println(response);
-    output.flush();
-    output.close();
+    ServletCRUD<Usuario, UsuarioDAO> crud = new ServletCRUD<Usuario, UsuarioDAO>(Usuario.class, new UsuarioDAO());
+    crud.update(req, resp);
   }
 }

@@ -5,13 +5,13 @@ import com.google.gson.*;
 public class Usuario {
   private int id;
   private String nome;
-  private String sexo;
+  private int sexo;
   private String cpf;
   private String dataNascimento;
   private String telefone;
 	private String email;
   private transient String senha;
-  private String tipoUsuario;
+  private int tipoUsuario;
 
 	public int getId() {
 		return this.id;
@@ -29,11 +29,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getSexo() {
+	public int getSexo() {
 		return this.sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(int sexo) {
 		this.sexo = sexo;
 	}
 
@@ -77,11 +77,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getTipoUsuario() {
+	public int getTipoUsuario() {
 		return this.tipoUsuario;
 	}
 
-	public void setTipoUsuario(String tipoUsuario) {
+	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 }
