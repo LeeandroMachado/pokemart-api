@@ -1,10 +1,10 @@
 package models;
 
-public class Vendas {
+public class Venda {
   private int id;
   private String dataVenda;
   private double valorTotal;
-  private String documentId;
+  private String documentoId;
   private int fkFormaPagamentoId;
   private int fkEnderecoId;
   private int fkUsuarioId;
@@ -33,12 +33,12 @@ public class Vendas {
 		this.valorTotal = valorTotal;
 	}
 
-	public String getDocumentId() {
-		return this.documentId;
+	public String getDocumentoId() {
+		return this.documentoId;
 	}
 
-	public void setDocumentId(String documentId) {
-		this.documentId = documentId;
+	public void setDocumentoId(String documentoId) {
+		this.documentoId = documentoId;
 	}
 
 	public int getFkFormaPagamentoId() {

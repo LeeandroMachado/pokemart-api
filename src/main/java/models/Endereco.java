@@ -10,7 +10,16 @@ public class Endereco {
   private String estado;
   private String complemento;
   private String descricao;
-  private boolean cobranca;
+  private int cobranca;
+
+	public int getCobranca() {
+		return this.cobranca;
+	}
+
+	public void setCobranca(int cobranca) {
+		this.cobranca = cobranca;
+	}
+
   private int fkUsuarioId;
 
 	public int getId() {
@@ -85,14 +94,6 @@ public class Endereco {
 		this.descricao = descricao;
 	}
 
-	public boolean isCobranca() {
-		return this.cobranca;
-	}
-
-	public void setCobranca(boolean cobranca) {
-		this.cobranca = cobranca;
-	}
-
 	public int getFkUsuarioId() {
 		return this.fkUsuarioId;
 	}
@@ -100,5 +101,4 @@ public class Endereco {
 	public void setFkUsuarioId(int fkUsuarioId) {
 		this.fkUsuarioId = fkUsuarioId;
 	}
-
 }
