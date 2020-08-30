@@ -12,6 +12,10 @@ import org.mindrot.jbcrypt.BCrypt;
 import utils.JWT;
 
 public class AutenticacaoDAO extends DAO {
+  String ISSUER = "pokemart.api";
+  String SUBJECT = "usuarios";
+  long TTL = 25000000 * 2500;
+
   public AutenticacaoDAO() {
     super();
   }
@@ -40,7 +44,7 @@ public class AutenticacaoDAO extends DAO {
       u.setSenha(rs.getString("senha"));
 
       if (BCrypt.checkpw(auth.getSenha(), new String(u.getSenha()))) {
-        return JWT.encode(String.valueOf(u.getId()), "pokemart.api", "usuarios", 5000);
+        return JWT.encode(String.valueOf(u.getId()), ISSUER, SUBJECT, TTL);
       } else {
         return "Senha inválida";
       }

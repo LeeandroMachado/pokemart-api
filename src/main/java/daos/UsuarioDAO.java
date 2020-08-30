@@ -1,5 +1,6 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,13 +11,13 @@ import java.util.Date;
 import java.util.List;
 import models.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
-import interfaces.IDao;
 
 public class UsuarioDAO extends DAO implements IDao<Usuario> {
   public UsuarioDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(Usuario u) throws SQLException, ParseException {
     String query = "INSERT INTO Usuarios (nome,sexo,cpf,data_nascimento,telefone,email,senha,tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String hashed = BCrypt.hashpw(u.getSenha(), BCrypt.gensalt());
@@ -38,6 +39,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     con.close();
   }
 
+  @Override
   public List<Usuario> listar() throws SQLException {
     String query = "SELECT * FROM Usuarios";
 
@@ -46,6 +48,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     return buscar(st);
   }
 
+  @Override
   public Usuario listar(int id) throws SQLException {
     String query = "SELECT * FROM Usuarios WHERE id = ?";
 
@@ -55,6 +58,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Usuarios WHERE id = ?";
 
@@ -65,6 +69,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     con.close();
   }
 
+  @Override
   public void atualizar(int id, Usuario u) throws SQLException, ParseException {
     String query = "UPDATE Usuarios SET nome=?,sexo=?,cpf=?,data_nascimento=?,telefone=?,email=?,tipo_usuario=? WHERE id = ?";
 
@@ -85,6 +90,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     con.close();
   }
 
+  @Override
   public List<Usuario> buscar(PreparedStatement st) throws SQLException {
     List<Usuario> lista = new ArrayList<Usuario>();
     ResultSet rs = st.executeQuery();

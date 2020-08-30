@@ -1,6 +1,5 @@
 package models;
 
-import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import java.lang.reflect.Field;
 
@@ -23,6 +22,10 @@ public class Usuario {
 	private int tipoUsuario;
 	@Expose (serialize = false, deserialize = true)
 	private String senha;
+
+	public boolean isAdmin() {
+		return this.getTipoUsuario() == 1;
+	}
 
 	public int getId() {
 		return this.id;
@@ -96,6 +99,7 @@ public class Usuario {
 		this.tipoUsuario = tipoUsuario;
 	}
 
+ @Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		String newLine = System.getProperty("line.separator");
