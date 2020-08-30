@@ -1,7 +1,11 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class FormaPagamento {
-  private int id;
+	@Expose
+	private int id;
+	@Expose
   private String descricao;
 
 	public int getId() {

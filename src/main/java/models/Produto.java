@@ -1,10 +1,17 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class Produto {
-  private int id;
-  private String nome;
-  private double peso;
-  private double preco;
+	@Expose
+	private int id;
+	@Expose
+	private String nome;
+	@Expose
+	private double peso;
+	@Expose
+	private double preco;
+	@Expose
   private int qtdEstoque;
 
 	public int getId() {

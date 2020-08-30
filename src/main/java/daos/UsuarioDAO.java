@@ -20,7 +20,6 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
   public void cadastrar(Usuario u) throws SQLException, ParseException {
     String query = "INSERT INTO Usuarios (nome,sexo,cpf,data_nascimento,telefone,email,senha,tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String hashed = BCrypt.hashpw(u.getSenha(), BCrypt.gensalt());
-
     Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(u.getDataNascimento());
     java.sql.Date dataSql = new java.sql.Date(dataNascimento.getTime());
 

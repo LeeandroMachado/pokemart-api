@@ -1,7 +1,11 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class ProdutoVenda {
-  private int fkProdutoId;
+	@Expose
+	private int fkProdutoId;
+	@Expose
   private int fkVendaId;
 
 	public int getFkProdutoId() {

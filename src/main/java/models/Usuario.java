@@ -1,17 +1,28 @@
 package models;
 
 import com.google.gson.*;
+import com.google.gson.annotations.Expose;
+import java.lang.reflect.Field;
 
 public class Usuario {
-  private int id;
-  private String nome;
-  private int sexo;
-  private String cpf;
-  private String dataNascimento;
-  private String telefone;
+	@Expose
+	private int id;
+	@Expose
+	private String nome;
+	@Expose
+	private int sexo;
+	@Expose
+	private String cpf;
+	@Expose
+	private String dataNascimento;
+	@Expose
+	private String telefone;
+	@Expose
 	private String email;
-  private transient String senha;
-  private int tipoUsuario;
+	@Expose
+	private int tipoUsuario;
+	@Expose (serialize = false, deserialize = true)
+	private String senha;
 
 	public int getId() {
 		return this.id;
@@ -83,5 +94,31 @@ public class Usuario {
 
 	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		String newLine = System.getProperty("line.separator");
+
+		result.append( this.getClass().getName() );
+		result.append( " Object {" );
+		result.append(newLine);
+
+		Field[] fields = this.getClass().getDeclaredFields();
+
+		for ( Field field : fields  ) {
+			result.append("  ");
+			try {
+				result.append( field.getName() );
+				result.append(": ");
+				result.append( field.get(this) );
+			} catch ( IllegalAccessException ex ) {
+				System.out.println(ex);
+			}
+			result.append(newLine);
+		}
+		result.append("}");
+
+		return result.toString();
 	}
 }

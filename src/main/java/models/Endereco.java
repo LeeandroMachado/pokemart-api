@@ -1,15 +1,27 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class Endereco {
-  private int id;
-  private String cep;
-  private String rua;
-  private String num;
-  private String bairro;
-  private String cidade;
-  private String estado;
-  private String complemento;
-  private String descricao;
+	@Expose
+	private int id;
+	@Expose
+	private String cep;
+	@Expose
+	private String rua;
+	@Expose
+	private String num;
+	@Expose
+	private String bairro;
+	@Expose
+	private String cidade;
+	@Expose
+	private String estado;
+	@Expose
+	private String complemento;
+	@Expose
+	private String descricao;
+	@Expose
   private int cobranca;
 
 	public int getCobranca() {

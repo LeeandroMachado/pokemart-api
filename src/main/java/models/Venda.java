@@ -1,12 +1,21 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class Venda {
-  private int id;
-  private String dataVenda;
-  private double valorTotal;
-  private String documentoId;
-  private int fkFormaPagamentoId;
-  private int fkEnderecoId;
+	@Expose
+	private int id;
+	@Expose
+	private String dataVenda;
+	@Expose
+	private double valorTotal;
+	@Expose
+	private String documentoId;
+	@Expose
+	private int fkFormaPagamentoId;
+	@Expose
+	private int fkEnderecoId;
+	@Expose
   private int fkUsuarioId;
 
 	public int getId() {

@@ -1,6 +1,7 @@
 package utils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import daos.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,7 +57,7 @@ public class ServletCRUD<M, D extends IDao<M>> {
   }
 
   public void create(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    Gson parser = new Gson();
+    Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     M model = parser.fromJson(req.getReader(), this.model);
     String response;
 

@@ -1,8 +1,13 @@
 package models;
 
+import com.google.gson.annotations.Expose;
+
 public class ImagemProduto {
-  private int id;
-  private String link;
+	@Expose
+	private int id;
+	@Expose
+	private String link;
+	@Expose
   private int fkProdutoId;
 
 	public int getId() {
