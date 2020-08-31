@@ -2,18 +2,15 @@ package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import daos.UsuarioDAO;
+import interfaces.IDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import interfaces.IDao;
-import models.Usuario;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ServletCRUD<M, D extends IDao<M>> {
   private D dao;
@@ -24,13 +21,13 @@ public class ServletCRUD<M, D extends IDao<M>> {
     this.dao = dao;
   }
 
-  public void show(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void show(HttpServletRequest req, HttpServletResponse resp, int id) throws IOException {
     Gson parser = new Gson();
     M values;
     String response;
 
     try {
-      values = this.dao.listar(Integer.parseInt(req.getParameter("id")));
+      values = this.dao.listar(id);
       response = parser.toJson(values);
     }
     catch (SQLException e) {
@@ -56,9 +53,8 @@ public class ServletCRUD<M, D extends IDao<M>> {
     respond(resp, response);
   }
 
-  public void create(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void create(HttpServletRequest req, HttpServletResponse resp, M model) throws IOException {
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-    M model = parser.fromJson(req.getReader(), this.model);
     String response;
 
     try {
@@ -80,7 +76,7 @@ public class ServletCRUD<M, D extends IDao<M>> {
 
     try {
       this.dao.excluir(Integer.parseInt(req.getParameter("id")));
-      response = "Usuário excluido com sucesso";
+      response = "Sucesso";
     }
     catch (SQLException e) {
       response = e.getMessage();
@@ -89,13 +85,12 @@ public class ServletCRUD<M, D extends IDao<M>> {
     respond(resp, response);
   }
 
-  public void update(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void update(HttpServletRequest req, HttpServletResponse resp, int id, M model) throws IOException {
     Gson parser = new Gson();
-    M model = parser.fromJson(req.getReader(), this.model);
     String response = "";
 
     try {
-      this.dao.atualizar(Integer.parseInt(req.getParameter("id")), model);
+      this.dao.atualizar(id, model);
       response = parser.toJson(model);
     }
     catch (SQLException e) {

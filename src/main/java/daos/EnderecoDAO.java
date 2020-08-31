@@ -1,22 +1,22 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.Endereco;
-import interfaces.IDao;
 
 public class EnderecoDAO extends DAO implements IDao<Endereco> {
   public EnderecoDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(Endereco e) throws SQLException {
     String query = "INSERT INTO Enderecos (cep,rua,num,bairro,cidade,estado,complemento,descricao,cobranca,fk_usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    System.out.println(e.toString());
     PreparedStatement st = con.prepareStatement(query);
     st.setString(1, e.getCep());
     st.setString(2, e.getRua());
@@ -28,12 +28,15 @@ public class EnderecoDAO extends DAO implements IDao<Endereco> {
     st.setString(8, e.getDescricao());
     st.setInt(9, e.getCobranca());
     st.setInt(10, e.getFkUsuarioId());
+    System.out.println(st.toString());
     st.execute();
     st.close();
+
 
     con.close();
   }
 
+  @Override
   public List<Endereco> listar() throws SQLException {
     String query = "SELECT * FROM Enderecos";
 
@@ -42,8 +45,9 @@ public class EnderecoDAO extends DAO implements IDao<Endereco> {
     return buscar(st);
   }
 
+  @Override
   public Endereco listar(int id) throws SQLException {
-    String query = "SELECT * FROM Enderecos WHERE id = ?";
+    String query = "SELECT * FROM Enderecos WHERE fk_usuario_id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
     st.setInt(1, id);
@@ -51,18 +55,21 @@ public class EnderecoDAO extends DAO implements IDao<Endereco> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Enderecos WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
     st.setInt(1, id);
+    System.out.println(st.toString());
     st.executeUpdate();
 
     con.close();
   }
 
+  @Override
   public void atualizar(int id, Endereco e) throws SQLException {
-    String query = "UPDATE Enderecos SET cep=?,rua=?,num=?,bairro=?,cidade=?,estado=?,complemento=?,descricao=?,cobranca=?,fk_usuario_id=? WHERE id=?";
+    String query = "UPDATE Enderecos SET cep=?,rua=?,num=?,bairro=?,cidade=?,estado=?,complemento=?,descricao=?,cobranca=? WHERE fk_usuario_id=?";
 
     PreparedStatement st = con.prepareStatement(query);
     st.setString(1, e.getCep());
@@ -75,13 +82,13 @@ public class EnderecoDAO extends DAO implements IDao<Endereco> {
     st.setString(8, e.getDescricao());
     st.setInt(9, e.getCobranca());
     st.setInt(10, e.getFkUsuarioId());
-    st.setInt(11, id);
     st.executeUpdate();
     st.close();
 
     con.close();
   }
 
+  @Override
   public List<Endereco> buscar(PreparedStatement st) throws SQLException {
     List<Endereco> lista = new ArrayList<Endereco>();
     ResultSet rs = st.executeQuery();

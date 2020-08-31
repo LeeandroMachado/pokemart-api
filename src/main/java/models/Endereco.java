@@ -1,6 +1,7 @@
 package models;
 
 import com.google.gson.annotations.Expose;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Endereco {
 	@Expose
@@ -22,7 +23,9 @@ public class Endereco {
 	@Expose
 	private String descricao;
 	@Expose
-  private int cobranca;
+	private int cobranca;
+	@Expose
+	private int fkUsuarioId;
 
 	public int getCobranca() {
 		return this.cobranca;
@@ -31,8 +34,6 @@ public class Endereco {
 	public void setCobranca(int cobranca) {
 		this.cobranca = cobranca;
 	}
-
-  private int fkUsuarioId;
 
 	public int getId() {
 		return this.id;
@@ -112,5 +113,10 @@ public class Endereco {
 
 	public void setFkUsuarioId(int fkUsuarioId) {
 		this.fkUsuarioId = fkUsuarioId;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

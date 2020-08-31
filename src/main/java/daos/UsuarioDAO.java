@@ -71,7 +71,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
 
   @Override
   public void atualizar(int id, Usuario u) throws SQLException, ParseException {
-    String query = "UPDATE Usuarios SET nome=?,sexo=?,cpf=?,data_nascimento=?,telefone=?,email=?,tipo_usuario=? WHERE id = ?";
+    String query = "UPDATE Usuarios SET nome=?,sexo=?,cpf=?,data_nascimento=?,telefone=? WHERE id = ?";
 
     Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(u.getDataNascimento());
     java.sql.Date dataSql = new java.sql.Date(dataNascimento.getTime());
@@ -82,9 +82,7 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
     st.setString(3, u.getCpf());
     st.setDate(4, dataSql);
     st.setString(5, u.getTelefone());
-    st.setString(6, u.getEmail());
-    st.setInt(7, u.getTipoUsuario());
-    st.setInt(8, id);
+    st.setInt(6, id);
     st.executeUpdate();
 
     con.close();

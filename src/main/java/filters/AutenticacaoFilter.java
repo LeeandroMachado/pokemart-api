@@ -23,40 +23,52 @@ public class AutenticacaoFilter implements Filter {
     return new String[]{};
   }
 
+  private void validarJWT(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, HttpSession session) throws IOException , SQLException {
+    if (httpServletRequest.getHeader("authorization") == null) {
+      throw new SignatureException("Token não fornecido.");
+    }
+
+    String token = httpServletRequest.getHeader("authorization").replace("Bearer ", "");
+    Claims claim = JWT.decodeJWT(token);
+
+    if(claim.getSubject() != null) {
+      UsuarioDAO udao = new UsuarioDAO();
+      Usuario u = udao.listar(Integer.parseInt(claim.getId()));
+
+      session.setAttribute("usuario", u);
+    }
+  }
+
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest httpServletRequest = (HttpServletRequest) request;
     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     String method = httpServletRequest.getMethod();
+    HttpSession session = httpServletRequest.getSession();
 
     if (ArrayUtils.contains(this.getPrivateMethods(), method)) {
       try {
-        String token = httpServletRequest.getHeader("authorization").replace("Bearer ", "");
-        Claims claim = JWT.decodeJWT(token);
-
-        if(claim.getSubject() != null) {
-          HttpSession session = httpServletRequest.getSession();
-          UsuarioDAO udao = new UsuarioDAO();
-          Usuario u = udao.listar(Integer.parseInt(claim.getId()));
-          session.setAttribute("usuario", u);
-
-          chain.doFilter(request, response);
-
-          session.invalidate();
-        }
+        validarJWT(httpServletRequest, httpServletResponse, session);
       } catch (ExpiredJwtException e) {
-        System.out.println(e.getMessage());
+        System.out.println("ExpiredJwtException: " + e.toString());
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        return;
       } catch (SignatureException e) {
-        System.out.println(e.getMessage());
+        System.out.println("SignatureException: " + e.toString());
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        return;
       } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        System.out.println("SQLException: " + e.toString());
         httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return;
       } catch (Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println("Exception: " + e.toString());
         httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return;
       }
+
+      chain.doFilter(request, response);
+      session.invalidate();
     } else {
       chain.doFilter(request, response);
     }
