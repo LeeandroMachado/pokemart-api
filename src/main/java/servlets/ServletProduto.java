@@ -15,7 +15,9 @@ import utils.ServletCRUD;
 public class ServletProduto extends ServletPermissoes {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(Produto.class, new ProdutoDAO());
+    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(
+      Produto.class, new ProdutoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     String id = req.getParameter("id");
 
@@ -25,21 +27,23 @@ public class ServletProduto extends ServletPermissoes {
     }
 
     if (id != null) {
-      crud.show(req, resp, Integer.parseInt(id));
+      crud.show(Integer.parseInt(id));
     } else {
-      crud.index(req, resp);
+      crud.index();
     }
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(Produto.class, new ProdutoDAO());
+    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(
+      Produto.class, new ProdutoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Produto p = parser.fromJson(req.getReader(), Produto.class);
 
     if (u.isAdmin()) {
-      crud.create(req, resp, p);
+      crud.create(p);
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
@@ -48,11 +52,13 @@ public class ServletProduto extends ServletPermissoes {
 
   @Override
   protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(Produto.class, new ProdutoDAO());
+    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(
+      Produto.class, new ProdutoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
 
     if (u.isAdmin()) {
-      crud.destroy(req, resp);
+      crud.destroy(Integer.parseInt(req.getParameter("id")));
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
@@ -61,14 +67,16 @@ public class ServletProduto extends ServletPermissoes {
 
   @Override
   protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(Produto.class, new ProdutoDAO());
+    ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(
+      Produto.class, new ProdutoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Produto p = parser.fromJson(req.getReader(), Produto.class);
     String id = req.getParameter("id");
 
     if (u.isAdmin()) {
-      crud.update(req, resp, Integer.parseInt(id), p);
+      crud.update(Integer.parseInt(id), p);
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;

@@ -15,14 +15,16 @@ import utils.ServletCRUD;
 public class ServletEndereco extends ServletPermissoes {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(Endereco.class, new EnderecoDAO());
+    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(
+      Endereco.class, new EnderecoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     String id = req.getParameter("fkUsuarioId");
 
     if (isIndex(u, id)) {
-      crud.index(req, resp);
+      crud.index();
     } else if (u.isAdmin() || isUserInParams(u, id)) {
-      crud.show(req, resp, Integer.parseInt(id));
+      crud.show(Integer.parseInt(id));
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
@@ -31,14 +33,16 @@ public class ServletEndereco extends ServletPermissoes {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(Endereco.class, new EnderecoDAO());
+    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(
+      Endereco.class, new EnderecoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Endereco e = parser.fromJson(req.getReader(), Endereco.class);
     String id = String.valueOf(e.getFkUsuarioId());
 
     if (u.isAdmin() || isUserInParams(u, id)) {
-      crud.create(req, resp, e);
+      crud.create(e);
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
@@ -47,11 +51,13 @@ public class ServletEndereco extends ServletPermissoes {
 
   @Override
   protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(Endereco.class, new EnderecoDAO());
+    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(
+      Endereco.class, new EnderecoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
 
     if (u.isAdmin()) {
-      crud.destroy(req, resp);
+      crud.destroy(Integer.parseInt(req.getParameter("id")));
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
@@ -60,14 +66,16 @@ public class ServletEndereco extends ServletPermissoes {
 
   @Override
   protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(Endereco.class, new EnderecoDAO());
+    ServletCRUD<Endereco, EnderecoDAO> crud = new ServletCRUD<Endereco, EnderecoDAO>(
+      Endereco.class, new EnderecoDAO(), req, resp
+    );
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Endereco e = parser.fromJson(req.getReader(), Endereco.class);
     String id = String.valueOf(e.getFkUsuarioId());
 
     if (u.isAdmin() || isUserInParams(u, id)) {
-      crud.update(req, resp, e.getId(), e);
+      crud.update(e.getId(), e);
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;

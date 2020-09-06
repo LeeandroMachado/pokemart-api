@@ -15,13 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletCRUD<M, D extends IDao<M>> {
   private D dao;
   private Class<M> model;
+  private HttpServletRequest req;
+  private HttpServletResponse resp;
 
-  public ServletCRUD(Class<M> model, D dao) {
+  public ServletCRUD(Class<M> model, D dao, HttpServletRequest req, HttpServletResponse resp) {
     this.model = model;
     this.dao = dao;
+    this.req = req;
+    this.resp = resp;
   }
 
-  public void show(HttpServletRequest req, HttpServletResponse resp, int id) throws IOException {
+  public void show(int id) throws IOException {
     Gson parser = new Gson();
     M values;
     String response;
@@ -34,10 +38,10 @@ public class ServletCRUD<M, D extends IDao<M>> {
       response = e.getMessage();
     }
 
-    respond(resp, response);
+    respond(response);
   }
 
-  public void index(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void index() throws IOException {
     Gson parser = new Gson();
     List<M> list = new ArrayList<M>();
     String response;
@@ -50,10 +54,10 @@ public class ServletCRUD<M, D extends IDao<M>> {
       response = e.getMessage();
     }
 
-    respond(resp, response);
+    respond(response);
   }
 
-  public void create(HttpServletRequest req, HttpServletResponse resp, M model) throws IOException {
+  public void create(M model) throws IOException {
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     String response;
 
@@ -68,24 +72,24 @@ public class ServletCRUD<M, D extends IDao<M>> {
       response = e.getMessage();
     }
 
-    respond(resp, response);
+    respond(response);
   }
 
-  public void destroy(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void destroy(int id) throws IOException {
     String response;
 
     try {
-      this.dao.excluir(Integer.parseInt(req.getParameter("id")));
+      this.dao.excluir(id);
       response = "Sucesso";
     }
     catch (SQLException e) {
       response = e.getMessage();
     }
 
-    respond(resp, response);
+    respond(response);
   }
 
-  public void update(HttpServletRequest req, HttpServletResponse resp, int id, M model) throws IOException {
+  public void update(int id, M model) throws IOException {
     Gson parser = new Gson();
     String response = "";
 
@@ -100,10 +104,10 @@ public class ServletCRUD<M, D extends IDao<M>> {
       response = e.getMessage();
     }
 
-    respond(resp, response);
+    respond(response);
   }
 
-  private void respond(HttpServletResponse resp, String response) throws IOException {
+  private void respond(String response) throws IOException {
     resp.setContentType("application/json");
     resp.setCharacterEncoding("UTF-8");
 
