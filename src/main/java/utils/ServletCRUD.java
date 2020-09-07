@@ -57,6 +57,22 @@ public class ServletCRUD<M, D extends IDao<M>> {
     respond(response);
   }
 
+  public void index(int id) throws IOException {
+    Gson parser = new Gson();
+    List<M> list = new ArrayList<M>();
+    String response;
+
+    try {
+      list = this.dao.listar(id);
+      response = parser.toJson(list);
+    }
+    catch (SQLException e) {
+      response = e.getMessage();
+    }
+
+    respond(response);
+  }
+
   public void create(M model) throws IOException {
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     String response;

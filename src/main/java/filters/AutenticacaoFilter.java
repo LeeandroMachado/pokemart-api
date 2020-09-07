@@ -33,7 +33,7 @@ public class AutenticacaoFilter implements Filter {
 
     if(claim.getSubject() != null) {
       UsuarioDAO udao = new UsuarioDAO();
-      Usuario u = udao.listarUm(integer.parseInt(claim.getId()));
+      Usuario u = udao.listarUm(Integer.parseInt(claim.getId()));
 
       session.setAttribute("usuario", u);
     }

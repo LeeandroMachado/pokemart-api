@@ -37,7 +37,12 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
 
   @Override
   public List<ImagemProduto> listar(int fk) throws SQLException {
-    return listar();
+    String query = "SELECT * FROM Imagens_produto WHERE fk_produto_id = ?";
+
+    PreparedStatement st = con.prepareStatement(query);
+    st.setInt(1, fk);
+
+    return buscar(st);
   }
 
   @Override
