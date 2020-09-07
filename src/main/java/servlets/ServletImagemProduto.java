@@ -77,9 +77,10 @@ public class ServletImagemProduto extends ServletPermissoes {
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     ImagemProduto ip = parser.fromJson(req.getReader(), ImagemProduto.class);
+    String id = req.getParameter(NOME_PARAMETRO_ID);
 
     if (u.isAdmin()) {
-      crud.update(ip.getId(), ip);
+      crud.update(Integer.parseInt(id), ip);
     } else {
       resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
