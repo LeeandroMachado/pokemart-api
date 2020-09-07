@@ -15,7 +15,7 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
 
   @Override
   public void cadastrar(FormaPagamento f) throws SQLException {
-    String query = "INSERT INTO Enderecos (descricao) VALUES (?)";
+    String query = "INSERT INTO Formas_pagamento (descricao) VALUES (?)";
 
     PreparedStatement st = con.prepareStatement(query);
     st.setString(1, f.getDescricao());
