@@ -49,7 +49,12 @@ public class UsuarioDAO extends DAO implements IDao<Usuario> {
   }
 
   @Override
-  public Usuario listar(int id) throws SQLException {
+  public List<Usuario> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public Usuario listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Usuarios WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);

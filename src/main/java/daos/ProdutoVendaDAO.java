@@ -1,19 +1,19 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.ProdutoVenda;
-import interfaces.IDao;
 
 public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
   public ProdutoVendaDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(ProdutoVenda p) throws SQLException {
     String query = "INSERT INTO Produtos_venda (fk_produto_id, fk_venda_id) VALUES (?, ?)";
 
@@ -26,6 +26,7 @@ public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
     con.close();
   }
 
+  @Override
   public List<ProdutoVenda> listar() throws SQLException {
     String query = "SELECT * FROM Produtos_venda";
 
@@ -34,7 +35,13 @@ public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
     return buscar(st);
   }
 
-  public ProdutoVenda listar(int idVenda) throws SQLException {
+  @Override
+  public List<ProdutoVenda> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public ProdutoVenda listarUm(int idVenda) throws SQLException {
     String query = "SELECT * FROM Produtos_venda WHERE fk_venda_id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -43,8 +50,10 @@ public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) { }
 
+  @Override
   public void atualizar(int idVenda, ProdutoVenda p) throws SQLException {
     String query = "UPDATE Produtos_venda SET fk_produto_id=?, fk_venda_id=? WHERE fk_venda_id=?";
 
@@ -58,6 +67,7 @@ public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
     con.close();
   }
 
+  @Override
   public List<ProdutoVenda> buscar(PreparedStatement st) throws SQLException {
     List<ProdutoVenda> lista = new ArrayList<ProdutoVenda>();
     ResultSet rs = st.executeQuery();

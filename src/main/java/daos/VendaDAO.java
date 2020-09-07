@@ -1,5 +1,6 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import models.Venda;
-import interfaces.IDao;
 
 public class VendaDAO extends DAO implements IDao<Venda> {
   public VendaDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(Venda v) throws SQLException, ParseException {
     String query = "INSERT INTO Vendas (data_venda, valor_total, documento_id, fk_forma_pagamento_id, fk_endereco_id, fk_usuario_id) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -35,6 +36,7 @@ public class VendaDAO extends DAO implements IDao<Venda> {
     con.close();
   }
 
+  @Override
   public List<Venda> listar() throws SQLException {
     String query = "SELECT * FROM Vendas";
 
@@ -43,7 +45,13 @@ public class VendaDAO extends DAO implements IDao<Venda> {
     return buscar(st);
   }
 
-  public Venda listar(int id) throws SQLException {
+  @Override
+  public List<Venda> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public Venda listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Vendas WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -52,6 +60,7 @@ public class VendaDAO extends DAO implements IDao<Venda> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Vendas WHERE id = ?";
 
@@ -62,6 +71,7 @@ public class VendaDAO extends DAO implements IDao<Venda> {
     con.close();
   }
 
+  @Override
   public void atualizar(int id, Venda v) throws SQLException , ParseException {
     String query = "UPDATE Vendas SET data_venda=?, valor_total=?, documento_id=?, fk_forma_pagamento_id=?, fk_endereco_id=?, fk_usuario_id=? WHERE id=?";
 
@@ -82,6 +92,7 @@ public class VendaDAO extends DAO implements IDao<Venda> {
     con.close();
   }
 
+  @Override
   public List<Venda> buscar(PreparedStatement st) throws SQLException {
     List<Venda> lista = new ArrayList<Venda>();
     ResultSet rs = st.executeQuery();
@@ -103,5 +114,4 @@ public class VendaDAO extends DAO implements IDao<Venda> {
 
     return lista;
   }
-
 }

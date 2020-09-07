@@ -1,19 +1,19 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.Produto;
-import interfaces.IDao;
 
 public class ProdutoDAO extends DAO implements IDao<Produto> {
   public ProdutoDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(Produto p) throws SQLException {
     String query = "INSERT INTO Produtos (nome, peso, preco, qtd_estoque) VALUES (?, ?, ?, ?)";
 
@@ -28,6 +28,7 @@ public class ProdutoDAO extends DAO implements IDao<Produto> {
     con.close();
   }
 
+  @Override
   public List<Produto> listar() throws SQLException {
     String query = "SELECT * FROM Produtos";
 
@@ -36,7 +37,13 @@ public class ProdutoDAO extends DAO implements IDao<Produto> {
     return buscar(st);
   }
 
-  public Produto listar(int id) throws SQLException {
+  @Override
+  public List<Produto> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public Produto listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Produtos WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -45,6 +52,7 @@ public class ProdutoDAO extends DAO implements IDao<Produto> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Produtos WHERE id = ?";
 
@@ -55,6 +63,7 @@ public class ProdutoDAO extends DAO implements IDao<Produto> {
     con.close();
   }
 
+  @Override
   public void atualizar(int id, Produto p) throws SQLException {
     String query = "UPDATE Produtos SET nome=?, peso=?, preco=?, qtd_estoque=? WHERE id=?";
 
@@ -70,6 +79,7 @@ public class ProdutoDAO extends DAO implements IDao<Produto> {
     con.close();
   }
 
+  @Override
   public List<Produto> buscar(PreparedStatement st) throws SQLException {
     List<Produto> lista = new ArrayList<Produto>();
     ResultSet rs = st.executeQuery();

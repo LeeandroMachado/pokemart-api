@@ -31,7 +31,7 @@ public class ServletCRUD<M, D extends IDao<M>> {
     String response;
 
     try {
-      values = this.dao.listar(id);
+      values = this.dao.listarUm(id);
       response = parser.toJson(values);
     }
     catch (SQLException e) {

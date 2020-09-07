@@ -46,7 +46,12 @@ public class EnderecoDAO extends DAO implements IDao<Endereco> {
   }
 
   @Override
-  public Endereco listar(int id) throws SQLException {
+  public List<Endereco> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public Endereco listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Enderecos WHERE fk_usuario_id = ?";
 
     PreparedStatement st = con.prepareStatement(query);

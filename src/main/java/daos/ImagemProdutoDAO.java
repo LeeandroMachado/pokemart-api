@@ -1,19 +1,19 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.ImagemProduto;
-import interfaces.IDao;
 
 public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
   public ImagemProdutoDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(ImagemProduto i) throws SQLException {
     String query = "INSERT INTO Imagens_produto (link, fk_produto_id) VALUES (?, ?)";
 
@@ -26,6 +26,7 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
     con.close();
   }
 
+  @Override
   public List<ImagemProduto> listar() throws SQLException {
     String query = "SELECT * FROM Imagens_produto";
 
@@ -34,7 +35,13 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
     return buscar(st);
   }
 
-  public ImagemProduto listar(int id) throws SQLException {
+  @Override
+  public List<ImagemProduto> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public ImagemProduto listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Imagens_produto WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -43,6 +50,7 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Imagens_produto WHERE id = ?";
 
@@ -53,6 +61,7 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
     con.close();
   }
 
+  @Override
   public void atualizar(int id, ImagemProduto i) throws SQLException {
     String query = "UPDATE Imagens_produto SET link=?, fk_produto_id=? WHERE id=?";
 
@@ -66,6 +75,7 @@ public class ImagemProdutoDAO extends DAO implements IDao<ImagemProduto> {
     con.close();
   }
 
+  @Override
   public List<ImagemProduto> buscar(PreparedStatement st) throws SQLException {
     List<ImagemProduto> lista = new ArrayList<ImagemProduto>();
     ResultSet rs = st.executeQuery();

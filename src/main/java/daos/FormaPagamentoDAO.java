@@ -1,19 +1,19 @@
 package daos;
 
+import interfaces.IDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.FormaPagamento;
-import interfaces.IDao;
 
 public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
   public FormaPagamentoDAO() {
     super();
   }
 
+  @Override
   public void cadastrar(FormaPagamento f) throws SQLException {
     String query = "INSERT INTO Enderecos (descricao) VALUES (?)";
 
@@ -25,6 +25,7 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
     con.close();
   }
 
+  @Override
   public List<FormaPagamento> listar() throws SQLException {
     String query = "SELECT * FROM Formas_pagamento";
 
@@ -33,7 +34,13 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
     return buscar(st);
   }
 
-  public FormaPagamento listar(int id) throws SQLException {
+  @Override
+  public List<FormaPagamento> listar(int fk) throws SQLException {
+    return listar();
+  }
+
+  @Override
+  public FormaPagamento listarUm(int id) throws SQLException {
     String query = "SELECT * FROM Formas_pagamento WHERE id = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -42,6 +49,7 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
     return buscar(st).get(0);
   }
 
+  @Override
   public void excluir(int id) throws SQLException {
     String query = "DELETE FROM Formas_pagamento WHERE id = ?";
 
@@ -52,6 +60,7 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
     con.close();
   }
 
+  @Override
   public void atualizar(int id, FormaPagamento f) throws SQLException {
     String query = "UPDATE Formas_pagamento SET descricao=? WHERE id=?";
 
@@ -64,6 +73,7 @@ public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
     con.close();
   }
 
+  @Override
   public List<FormaPagamento> buscar(PreparedStatement st) throws SQLException {
     List<FormaPagamento> lista = new ArrayList<FormaPagamento>();
     ResultSet rs = st.executeQuery();
