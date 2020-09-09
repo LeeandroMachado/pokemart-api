@@ -21,7 +21,6 @@ public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
     st.setInt(1, p.getFkProdutoId());
     st.setInt(2, p.getFkVendaId());
     st.execute();
-    st.close();
   }
 
   @Override

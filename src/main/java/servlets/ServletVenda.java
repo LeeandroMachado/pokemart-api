@@ -5,8 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import daos.ProdutoVendaDAO;
 import daos.VendaDAO;
+import daos.VendaDAOMongo;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -29,11 +31,17 @@ public class ServletVenda extends ServletPermissoes {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    resp.setContentType("application/json");
+    resp.setCharacterEncoding("UTF-8");
+
+    String response = "Ocorreu um erro interno";
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    PrintWriter output = resp.getWriter();
     JSONObject jsonObject = new JSONObject(getJsonString(req));
     Type produtosType = new TypeToken<ArrayList<Produto>>(){}.getType();
     List<Produto> produtosList = parser.fromJson(jsonObject.getJSONArray("produtos").toString(), produtosType);
     VendaDAO vdao = new VendaDAO();
+    VendaDAOMongo vdaom = new VendaDAOMongo();
     ProdutoVendaDAO pvdao = new ProdutoVendaDAO();
 
     try {
@@ -46,11 +54,19 @@ public class ServletVenda extends ServletPermissoes {
         pv.setFkVendaId(fkVendaId);
         pvdao.cadastrar(pv);
       }
+
+      vdaom.cadastrar(fkVendaId);
+
+      response = "Sucesso";
     } catch (ParseException e) {
       System.out.println(e.toString());
     } catch (SQLException e) {
       System.out.println(e.toString());
     }
+
+    output.println(parser.toJson(response));
+    output.flush();
+    output.close();
   }
 
   private String getJsonString(HttpServletRequest req) throws IOException {
