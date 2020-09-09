@@ -20,13 +20,33 @@ import javax.servlet.http.HttpServletResponse;
 import models.Produto;
 import models.ProdutoVenda;
 import models.Venda;
+import org.bson.Document;
 import org.json.JSONObject;
 
 @WebServlet("/vendas")
 public class ServletVenda extends ServletPermissoes {
+  private final String ID_PARAMETER = "id";
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    resp.setContentType("application/json");
+    resp.setCharacterEncoding("UTF-8");
 
+    List<Document> notas = new ArrayList<Document>();
+    Document nota = new Document();
+    Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    PrintWriter output = resp.getWriter();
+    VendaDAOMongo vdaom = new VendaDAOMongo();
+
+    if (req.getParameter(ID_PARAMETER) == null) {
+      notas = vdaom.listar();
+      output.println(parser.toJson(notas));
+    } else {
+      nota = vdaom.listarUm(Integer.parseInt(req.getParameter(ID_PARAMETER)));
+      output.println(parser.toJson(nota));
+    }
+
+    output.flush();
+    output.close();
   }
 
   @Override
