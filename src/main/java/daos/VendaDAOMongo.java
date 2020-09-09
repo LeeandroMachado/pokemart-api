@@ -23,12 +23,20 @@ public class VendaDAOMongo {
   }
 
   public void cadastrar(int idVenda) {
-    Venda v = getVenda(idVenda);
-    Endereco e = getEndereco(idVenda);
-    List<Produto> produtos = getProdutos(v);
-    Usuario u = getUsuario(idVenda);
+    VendaDAO vdao = new VendaDAO();
 
-    this.collection.insertOne(buildar(v, e, produtos, u));
+    try {
+      Venda v = vdao.getVenda(idVenda);
+      Endereco e = vdao.getEndereco(idVenda);
+      List<Produto> produtos = vdao.getProdutos(idVenda);
+      Usuario u = vdao.getCliente(idVenda);
+
+      this.collection.insertOne(buildar(v, e, produtos, u));
+    } catch (SQLException err) {
+      System.out.println(err.toString());
+    } catch (Exception ex) {
+      System.out.println(ex.toString());
+    }
   }
 
   private Document buildar(Venda v, Endereco e, List<Produto> p, Usuario u) {
@@ -57,58 +65,5 @@ public class VendaDAOMongo {
     compra.append("pagamento", pagamento);
 
     return compra;
-  }
-
-  private Usuario getUsuario(int idVenda) {
-    Usuario u = new Usuario();
-    VendaDAO vdao = new VendaDAO();
-
-    try {
-      u = vdao.getCliente(idVenda);
-    } catch (SQLException err) {
-      System.out.println(err.toString());
-    }
-
-    return u;
-  }
-
-  private Endereco getEndereco(int idVenda) {
-    Endereco e = new Endereco();
-    VendaDAO vdao = new VendaDAO();
-
-    try {
-      e = vdao.getEndereco(idVenda);
-    } catch (SQLException err) {
-      System.out.println(err.toString());
-    }
-
-    return e;
-  }
-
-  private Venda getVenda(int idVenda) {
-    Venda v = new Venda();
-    VendaDAO vdao = new VendaDAO();
-
-    try {
-      v = vdao.getVenda(idVenda);
-    } catch (SQLException e) {
-      System.out.println(e.toString());
-    }
-
-    return v;
-  }
-
-  private List<Produto> getProdutos(Venda v) {
-    List<Produto> produtos = new ArrayList<Produto>();
-    List<Document> documentos = new ArrayList<Document>();
-    VendaDAO vdao = new VendaDAO();
-
-    try {
-      produtos = vdao.getProdutos(v.getId());
-    } catch (SQLException e) {
-      System.out.println(e.toString());
-    }
-
-    return produtos;
   }
 }
