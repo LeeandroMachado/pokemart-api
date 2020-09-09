@@ -1,0 +1,1063 @@
+{
+	"info": {
+		"_postman_id": "ada19bc8-3317-4afb-a6de-5e1b03606f35",
+		"name": "pokemart-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Charizard\",\n    \"sexo\": \"1\",\n    \"cpf\": \"444.444.444-444\",\n    \"dataNascimento\": \"18/09/1996\",\n    \"telefone\": \"15 99999-9999\",\n    \"email\": \"charizard@gmail.com\",\n    \"senha\": \"charizard\",\n    \"tipoUsuario\": \"0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxNyIsImlhdCI6MTU5OTM1Mjc5NSwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.qS1K5PLWJvpWOp_-3ZsmFDIgeCSNkTKK3CmJ4LP0ND4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxNyIsImlhdCI6MTU5OTM1Mjc5NSwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.qS1K5PLWJvpWOp_-3ZsmFDIgeCSNkTKK3CmJ4LP0ND4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios?id=17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODQzMDU3LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.RDrU_VCt1m3MuQu9AJqvZinlmi0KCPDgtE5I1sS1uKc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODQzMDU3LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.RDrU_VCt1m3MuQu9AJqvZinlmi0KCPDgtE5I1sS1uKc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Leandro Medeiros\",\n    \"sexo\": 1,\n    \"cpf\": \"999.444.444-444\",\n    \"dataNascimento\": \"18/09/1996\",\n    \"telefone\": \"15 99999-9999\",\n    \"email\": \"leandro@gmail.com\",\n    \"tipoUsuario\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"leandro@gmail.com\",\n    \"senha\": \"leandro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODM5MjI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.y8N5mwto9PtIh8uxWE2v__7rxLHB8T1m0TKRpfBxoaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cep\": \"18207-180\",\n    \"rua\": \"Rua Elesbão Branco da Silva\",\n    \"num\": \"555\",\n    \"bairro\": \"Central Pq 4L\",\n    \"cidade\": \"Itapetininga\",\n    \"estado\": \"SP\",\n    \"complemento\": \"Casa\",\n    \"descricao\": \"\",\n    \"cobranca\": 1,\n    \"fkUsuarioId\": 16\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios/enderecos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios",
+								"enderecos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODM5MjI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.y8N5mwto9PtIh8uxWE2v__7rxLHB8T1m0TKRpfBxoaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios/enderecos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios",
+								"enderecos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyMCIsImlhdCI6MTU5OTM1ODQwMSwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.zfku_OvC_EASPPcYfTx4p5sXKcpHQVmvkuzRF09xaXo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios/enderecos?fkUsuarioId=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios",
+								"enderecos"
+							],
+							"query": [
+								{
+									"key": "fkUsuarioId",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODQzMDU3LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.RDrU_VCt1m3MuQu9AJqvZinlmi0KCPDgtE5I1sS1uKc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios/enderecos?id=36",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios",
+								"enderecos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "36"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTk4ODQzMDU3LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.RDrU_VCt1m3MuQu9AJqvZinlmi0KCPDgtE5I1sS1uKc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cep\": \"18207-190\",\n    \"rua\": \"Rua Emilio Nastri\",\n    \"num\": \"123\",\n    \"bairro\": \"Vila Nastri\",\n    \"cidade\": \"Itapetininga\",\n    \"estado\": \"SP\",\n    \"complemento\": \"Casa\",\n    \"descricao\": \"\",\n    \"cobranca\": 1,\n    \"fkUsuarioId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/usuarios/enderecos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"usuarios",
+								"enderecos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Chicorita\",\n    \"peso\": 0.5,\n    \"preco\": 1500,\n    \"qtdEstoque\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOCIsImlhdCI6MTU5OTM1OTQ0OCwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.hrfoNW5FYqRGZX7lPZy_Wyrdpc9VtcVMmHEPgcXiuo0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOCIsImlhdCI6MTU5OTM1OTQ0OCwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.hrfoNW5FYqRGZX7lPZy_Wyrdpc9VtcVMmHEPgcXiuo0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos?id=50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOCIsImlhdCI6MTU5OTM1OTQ0OCwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.hrfoNW5FYqRGZX7lPZy_Wyrdpc9VtcVMmHEPgcXiuo0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Cyndaquil\",\n    \"peso\": 0.5,\n    \"preco\": 500,\n    \"qtdEstoque\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos?id=50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOCIsImlhdCI6MTU5OTM1OTQ0OCwic3ViIjoidXN1YXJpb3MiLCJpc3MiOiJwb2tlbWFydC5hcGkifQ.hrfoNW5FYqRGZX7lPZy_Wyrdpc9VtcVMmHEPgcXiuo0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos?id=50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ImagemProduto",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"link\": \"http://www.google.com.br\",\n    \"fkProdutoId\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos/imagens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos",
+								"imagens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos/imagens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos",
+								"imagens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos/imagens?id=50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos",
+								"imagens"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos/imagens?id=49",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos",
+								"imagens"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "49"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"link\": \"https://facebook.com\",\n    \"fkProdutoId\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/produtos/imagens?id=166",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"produtos",
+								"imagens"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "166"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "FormaPagamento",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Cartão de credito\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/formas_pagamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"formas_pagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/formas_pagamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"formas_pagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/formas_pagamento?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"formas_pagamento"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/formas_pagamento?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"formas_pagamento"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NDQyNDI1LCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.ZDnbudOOKtD3v3TyyfB2F6SZX9W5jaIh_HuMqOYF1ak",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Panela\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/formas_pagamento?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"formas_pagamento"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Vendas",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fkFormaPagamentoId\": 1,\n    \"produtos\": [\n        {\n            \"id\": 50,\n            \"nome\": \"Chicorita\",\n            \"peso\": 0.5,\n            \"preco\": 1500,\n            \"qtdEstoque\": 5\n        },\n        {\n            \"id\": 38,\n            \"nome\": \"Ninetales\",\n            \"peso\": 0.5,\n            \"preco\": 1500,\n            \"qtdEstoque\": 5\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/vendas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"vendas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwiaWF0IjoxNTk5NTI2ODgwLCJzdWIiOiJ1c3VhcmlvcyIsImlzcyI6InBva2VtYXJ0LmFwaSJ9.arrAqhTvPK9bIuk3Hzn32s0xXy0f4hsnjq61pHtV6xU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pokemart-api/vendas?id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pokemart-api",
+								"vendas"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
