@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Produto;
 import models.ProdutoVenda;
+import models.Usuario;
 import models.Venda;
 import org.bson.Document;
 import org.json.JSONObject;
@@ -36,6 +37,12 @@ public class ServletVenda extends ServletPermissoes {
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     PrintWriter output = resp.getWriter();
     VendaDAOMongo vdaom = new VendaDAOMongo();
+    Usuario u = usuarioLogado(req);
+
+    if (!u.isAdmin()) {
+      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+      return;
+    }
 
     if (req.getParameter(ID_PARAMETER) == null) {
       notas = vdaom.listar();
