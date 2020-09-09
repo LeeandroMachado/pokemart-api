@@ -1,16 +1,20 @@
 package daos;
 
 import interfaces.IDao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.FormaPagamento;
+import utils.ConexaoBanco;
 
-public class FormaPagamentoDAO extends DAO implements IDao<FormaPagamento> {
+public class FormaPagamentoDAO implements IDao<FormaPagamento> {
+  protected Connection con;
+
   public FormaPagamentoDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   @Override

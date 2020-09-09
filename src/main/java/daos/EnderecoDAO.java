@@ -1,16 +1,20 @@
 package daos;
 
 import interfaces.IDao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.Endereco;
+import utils.ConexaoBanco;
 
-public class EnderecoDAO extends DAO implements IDao<Endereco> {
+public class EnderecoDAO implements IDao<Endereco> {
+  protected Connection con;
+
   public EnderecoDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   @Override

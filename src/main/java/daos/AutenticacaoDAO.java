@@ -2,6 +2,7 @@ package daos;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import models.Autenticacao;
 import models.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
+import utils.ConexaoBanco;
 import utils.JWT;
 
-public class AutenticacaoDAO extends DAO {
+public class AutenticacaoDAO {
   String ISSUER = "pokemart.api";
   String SUBJECT = "usuarios";
   long TTL = 25000000 * 2500;
+  protected Connection con;
 
   public AutenticacaoDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   public String autenticar(HttpServletRequest req) throws IOException, SQLException {

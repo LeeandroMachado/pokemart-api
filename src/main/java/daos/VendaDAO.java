@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +14,13 @@ import models.Endereco;
 import models.Produto;
 import models.Usuario;
 import models.Venda;
+import utils.ConexaoBanco;
 
-public class VendaDAO extends DAO {
+public class VendaDAO {
+  protected Connection con;
+
   public VendaDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   public Venda buildar(Usuario usuario, List<Produto> produtos, int fkFormaPagamentoId) throws SQLException {

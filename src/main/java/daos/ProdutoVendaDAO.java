@@ -1,16 +1,20 @@
 package daos;
 
 import interfaces.IDao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.ProdutoVenda;
+import utils.ConexaoBanco;
 
-public class ProdutoVendaDAO extends DAO implements IDao<ProdutoVenda> {
+public class ProdutoVendaDAO implements IDao<ProdutoVenda> {
+  protected Connection con;
+
   public ProdutoVendaDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   @Override

@@ -1,6 +1,7 @@
 package daos;
 
 import interfaces.IDao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +12,13 @@ import java.util.Date;
 import java.util.List;
 import models.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
+import utils.ConexaoBanco;
 
-public class UsuarioDAO extends DAO implements IDao<Usuario> {
+public class UsuarioDAO implements IDao<Usuario> {
+  protected Connection con;
+
   public UsuarioDAO() {
-    super();
+    this.con = new ConexaoBanco().getConnection();
   }
 
   @Override
