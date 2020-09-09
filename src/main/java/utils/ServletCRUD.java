@@ -2,7 +2,7 @@ package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ServletCRUD<M, D extends IDao<M>> {
+public class ServletCRUD<M, D extends ICrud<M>> {
   private D dao;
   private Class<M> model;
   private HttpServletRequest req;

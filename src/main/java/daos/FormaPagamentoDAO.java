@@ -1,6 +1,6 @@
 package daos;
 
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import models.FormaPagamento;
 import utils.ConexaoBanco;
 
-public class FormaPagamentoDAO implements IDao<FormaPagamento> {
+public class FormaPagamentoDAO implements ICrud<FormaPagamento> {
   protected Connection con;
 
   public FormaPagamentoDAO() {

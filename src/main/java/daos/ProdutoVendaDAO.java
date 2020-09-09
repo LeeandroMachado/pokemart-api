@@ -1,6 +1,6 @@
 package daos;
 
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import models.ProdutoVenda;
 import utils.ConexaoBanco;
 
-public class ProdutoVendaDAO implements IDao<ProdutoVenda> {
+public class ProdutoVendaDAO implements ICrud<ProdutoVenda> {
   protected Connection con;
 
   public ProdutoVendaDAO() {

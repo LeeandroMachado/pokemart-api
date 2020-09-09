@@ -1,6 +1,6 @@
 package daos;
 
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import models.ImagemProduto;
 import utils.ConexaoBanco;
 
-public class ImagemProdutoDAO implements IDao<ImagemProduto> {
+public class ImagemProdutoDAO implements ICrud<ImagemProduto> {
   protected Connection con;
 
   public ImagemProdutoDAO() {

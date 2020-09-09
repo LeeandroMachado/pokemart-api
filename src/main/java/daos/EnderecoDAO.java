@@ -1,6 +1,6 @@
 package daos;
 
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.util.List;
 import models.Endereco;
 import utils.ConexaoBanco;
 
-public class EnderecoDAO implements IDao<Endereco> {
+public class EnderecoDAO implements ICrud<Endereco> {
   protected Connection con;
 
   public EnderecoDAO() {

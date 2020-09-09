@@ -27,6 +27,7 @@ import org.json.JSONObject;
 @WebServlet("/vendas")
 public class ServletVenda extends ServletPermissoes {
   private final String ID_PARAMETER = "id";
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     resp.setContentType("application/json");

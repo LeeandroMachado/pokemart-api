@@ -1,6 +1,6 @@
 package daos;
 
-import interfaces.IDao;
+import interfaces.ICrud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import models.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 import utils.ConexaoBanco;
 
-public class UsuarioDAO implements IDao<Usuario> {
+public class UsuarioDAO implements ICrud<Usuario> {
   protected Connection con;
 
   public UsuarioDAO() {
