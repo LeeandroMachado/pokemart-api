@@ -4,7 +4,7 @@ import javax.servlet.annotation.WebFilter;
 
 @WebFilter({ "/produtos" })
 public class ProdutoFilter extends AutenticacaoFilter {
-  private String[] PRIVATE_METHODS = { "GET", "PUT", "DELETE", "POST" };
+  private String[] PRIVATE_METHODS = { "PUT", "DELETE", "POST" };
 
   @Override
   protected String[] getPrivateMethods() {

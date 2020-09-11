@@ -18,13 +18,8 @@ public class ServletProduto extends ServletPermissoes {
     ServletCRUD<Produto, ProdutoDAO> crud = new ServletCRUD<Produto, ProdutoDAO>(
       Produto.class, new ProdutoDAO(), req, resp
     );
-    Usuario u = usuarioLogado(req);
-    String id = req.getParameter("id");
 
-    if (!u.isAdmin()) {
-      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      return;
-    }
+    String id = req.getParameter("id");
 
     if (id != null) {
       crud.show(Integer.parseInt(id));
