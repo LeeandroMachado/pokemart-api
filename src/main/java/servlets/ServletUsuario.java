@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Usuario;
 import utils.ServletCRUD;
 
-@WebServlet("/usuarios")
+@WebServlet("/api/v1/usuarios")
 public class ServletUsuario extends ServletPermissoes {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

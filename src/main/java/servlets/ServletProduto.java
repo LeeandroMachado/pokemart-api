@@ -11,7 +11,7 @@ import models.Produto;
 import models.Usuario;
 import utils.ServletCRUD;
 
-@WebServlet("/produtos")
+@WebServlet("/api/v1/produtos")
 public class ServletProduto extends ServletPermissoes {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

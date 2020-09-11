@@ -24,7 +24,7 @@ import models.Venda;
 import org.bson.Document;
 import org.json.JSONObject;
 
-@WebServlet("/vendas")
+@WebServlet("/api/v1/vendas")
 public class ServletVenda extends ServletPermissoes {
   private final String ID_PARAMETER = "id";
 

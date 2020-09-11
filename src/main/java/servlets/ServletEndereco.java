@@ -11,7 +11,7 @@ import models.Endereco;
 import models.Usuario;
 import utils.ServletCRUD;
 
-@WebServlet("/usuarios/enderecos")
+@WebServlet("/api/v1/usuarios/enderecos")
 public class ServletEndereco extends ServletPermissoes {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

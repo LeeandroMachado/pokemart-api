@@ -11,7 +11,7 @@ import models.ImagemProduto;
 import models.Usuario;
 import utils.ServletCRUD;
 
-@WebServlet("/produtos/imagens")
+@WebServlet("/api/v1/produtos/imagens")
 public class ServletImagemProduto extends ServletPermissoes {
   private String NOME_PARAMETRO_ID = "id";
   private String NOME_PARAMETRO_FK = "fkProdutoId";

@@ -11,7 +11,7 @@ import models.FormaPagamento;
 import models.Usuario;
 import utils.ServletCRUD;
 
-@WebServlet("/formas_pagamento")
+@WebServlet("/api/v1/formas_pagamento")
 public class ServletFormaPagamento extends ServletPermissoes {
   private String NOME_PARAMETRO_ID = "id";
 
