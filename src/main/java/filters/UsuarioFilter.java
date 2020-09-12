@@ -2,7 +2,7 @@ package filters;
 
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter({ "/api/v1usuarios" })
+@WebFilter({ "/api/v1/usuarios" })
 public class UsuarioFilter extends AutenticacaoFilter {
   private String[] PRIVATE_METHODS = { "GET", "PUT", "DELETE" };
 

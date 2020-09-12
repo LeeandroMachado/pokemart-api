@@ -19,6 +19,7 @@ public class ServletUsuario extends ServletPermissoes {
     );
 
     Usuario u = usuarioLogado(req);
+    System.out.println("USUARIO: " + u.toString());
     String id = req.getParameter("id");
 
     if (isIndex(u, id)) {
