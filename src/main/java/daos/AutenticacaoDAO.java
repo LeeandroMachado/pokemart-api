@@ -1,6 +1,7 @@
 package daos;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +26,9 @@ public class AutenticacaoDAO {
 
   public String autenticar(HttpServletRequest req) throws IOException, SQLException {
     Usuario u;
-    Gson parser = new Gson();
+    Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Autenticacao auth = parser.fromJson(req.getReader(), Autenticacao.class);
+    String token;
     String query = "SELECT * FROM Usuarios WHERE email = ?";
 
     PreparedStatement st = con.prepareStatement(query);
@@ -47,7 +49,10 @@ public class AutenticacaoDAO {
       u.setSenha(rs.getString("senha"));
 
       if (BCrypt.checkpw(auth.getSenha(), new String(u.getSenha()))) {
-        return JWT.encode(String.valueOf(u.getId()), ISSUER, SUBJECT, TTL);
+        token = JWT.encode(String.valueOf(u.getId()), ISSUER, SUBJECT, TTL);
+        u.setToken(token);
+
+        return parser.toJson(u);
       } else {
         return "Senha inválida";
       }

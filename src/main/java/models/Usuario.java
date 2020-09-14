@@ -21,6 +21,17 @@ public class Usuario {
 	private int tipoUsuario;
 	@Expose (serialize = false, deserialize = true)
 	private String senha;
+	@Expose
+	private String token;
+
+	public String getToken() {
+		return this.token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 
 	public boolean isAdmin() {
 		return this.getTipoUsuario() == 1;

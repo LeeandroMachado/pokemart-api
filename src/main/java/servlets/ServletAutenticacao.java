@@ -1,6 +1,5 @@
 package servlets;
 
-import com.google.gson.Gson;
 import daos.AutenticacaoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +17,6 @@ public class ServletAutenticacao extends HttpServlet {
     resp.setCharacterEncoding("UTF-8");
 
     String response = "Ocorreu um erro interno";
-    Gson parser = new Gson();
     PrintWriter output = resp.getWriter();
 
     AutenticacaoDAO auth = new AutenticacaoDAO();
@@ -29,7 +27,7 @@ public class ServletAutenticacao extends HttpServlet {
       System.out.println("ERRO: " + e.getMessage());
     }
 
-    output.println(parser.toJson(response));
+    output.println(response);
     output.flush();
     output.close();
   }
