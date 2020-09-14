@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class ConexaoBanco {
   private Connection conexao = null;
   private final String BANCO = "pokemartdb";
-  private final String LOGIN = "root";
-  private final String SENHA = "";
+  private final String LOGIN = "sistema";
+  private final String SENHA = "123456";
   private final String HOST = "127.0.0.1";
 
   public Connection getConnection() {
