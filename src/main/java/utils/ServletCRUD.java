@@ -145,9 +145,9 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     resp.setCharacterEncoding("UTF-8");
 
     PrintWriter output = resp.getWriter();
-    resp.sendError(status);
     output.println(response);
     output.flush();
     output.close();
+    resp.sendError(status);
   }
 }
