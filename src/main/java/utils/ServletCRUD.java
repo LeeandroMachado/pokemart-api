@@ -29,6 +29,7 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     Gson parser = new Gson();
     M values;
     String response;
+    int status = HttpServletResponse.SC_OK;
 
     try {
       values = this.dao.listarUm(id);
@@ -36,17 +37,20 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     } catch (IndexOutOfBoundsException e) {
       response = this.model.getName() + " não cadastrado";
+      status = HttpServletResponse.SC_NO_CONTENT;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
   public void index() throws IOException {
     Gson parser = new Gson();
     List<M> list = new ArrayList<M>();
     String response;
+    int status = HttpServletResponse.SC_OK;
 
     try {
       list = this.dao.listar();
@@ -54,15 +58,17 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
   public void index(int id) throws IOException {
     Gson parser = new Gson();
     List<M> list = new ArrayList<M>();
     String response;
+    int status = HttpServletResponse.SC_OK;
 
     try {
       list = this.dao.listar(id);
@@ -70,14 +76,16 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
   public void create(M model) throws IOException {
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     String response;
+    int status = HttpServletResponse.SC_CREATED;
 
     try {
       this.dao.cadastrar(model);
@@ -85,16 +93,19 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
     catch (ParseException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
   public void destroy(int id) throws IOException {
     String response;
+    int status = HttpServletResponse.SC_OK;
 
     try {
       this.dao.excluir(id);
@@ -102,14 +113,16 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
   public void update(int id, M model) throws IOException {
     Gson parser = new Gson();
     String response = "";
+    int status = HttpServletResponse.SC_OK;
 
     try {
       this.dao.atualizar(id, model);
@@ -117,19 +130,22 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
     catch (ParseException e) {
       response = e.getMessage();
+      status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
     }
 
-    respond(response);
+    respond(response, status);
   }
 
-  private void respond(String response) throws IOException {
+  private void respond(String response, int status) throws IOException {
     resp.setContentType("application/json");
     resp.setCharacterEncoding("UTF-8");
 
     PrintWriter output = resp.getWriter();
+    resp.sendError(status);
     output.println(response);
     output.flush();
     output.close();
