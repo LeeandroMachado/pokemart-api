@@ -19,7 +19,7 @@ public class ServletEndereco extends ServletPermissoes {
       Endereco.class, new EnderecoDAO(), req, resp
     );
     Usuario u = usuarioLogado(req);
-    String id = req.getParameter("fkUsuarioId");
+    String id = String.valueOf(u.getId());
 
     if (isIndex(u, id)) {
       crud.index();
