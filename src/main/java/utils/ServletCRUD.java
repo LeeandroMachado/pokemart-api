@@ -36,6 +36,8 @@ public class ServletCRUD<M, D extends ICrud<M>> {
     }
     catch (SQLException e) {
       response = e.getMessage();
+    } catch (IndexOutOfBoundsException e) {
+      response = this.model.getName() + " não cadastrado";
     }
 
     respond(response);
