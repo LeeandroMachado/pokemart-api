@@ -20,13 +20,7 @@ public class ServletFormaPagamento extends ServletPermissoes {
     ServletCRUD<FormaPagamento, FormaPagamentoDAO> crud = new ServletCRUD<FormaPagamento, FormaPagamentoDAO>(
       FormaPagamento.class, new FormaPagamentoDAO(), req, resp
     );
-    Usuario u = usuarioLogado(req);
     String id = req.getParameter(NOME_PARAMETRO_ID);
-
-    if (!u.isAdmin()) {
-      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      return;
-    }
 
     if (id != null) {
       crud.show(Integer.parseInt(id));
