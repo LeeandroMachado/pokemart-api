@@ -143,11 +143,11 @@ public class ServletCRUD<M, D extends ICrud<M>> {
   private void respond(String response, int status) throws IOException {
     resp.setContentType("application/json");
     resp.setCharacterEncoding("UTF-8");
+    resp.setStatus(status);
 
     PrintWriter output = resp.getWriter();
     output.println(response);
     output.flush();
     output.close();
-    resp.sendError(status);
   }
 }
