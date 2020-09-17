@@ -40,11 +40,6 @@ public class ServletVenda extends ServletPermissoes {
     VendaDAOMongo vdaom = new VendaDAOMongo();
     Usuario u = usuarioLogado(req);
 
-    if (!u.isAdmin()) {
-      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      return;
-    }
-
     if (req.getParameter(ID_PARAMETER) == null) {
       notas = vdaom.listar(u.getId());
       output.println(parser.toJson(notas));
