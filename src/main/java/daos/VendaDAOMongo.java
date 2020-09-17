@@ -86,7 +86,8 @@ public class VendaDAOMongo {
       produtos.add(prod);
     }
 
-    compra.append("compra_id", u.getId());
+    compra.append("usuario_id", u.getId());
+    compra.append("compra_id", v.getId());
     compra.append("cliente_nome", u.getNome());
     compra.append("endereco_entrega", e.getRua() + ", Nº" + e.getNum() + " - " + e.getBairro() + " - " + e.getCidade() + " - " + e.getEstado());
     compra.append("valor_total", v.getValorTotal());
