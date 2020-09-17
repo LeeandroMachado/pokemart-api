@@ -23,10 +23,9 @@ public class VendaDAO {
     this.con = new ConexaoBanco().getConnection();
   }
 
-  public Venda buildar(Usuario usuario, List<Produto> produtos, int fkFormaPagamentoId) throws SQLException {
+  public Venda buildar(Usuario usuario, List<Produto> produtos, int fkFormaPagamentoId, int fkEnderecoId) throws SQLException {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date date = new Date();
-    Endereco e = new EnderecoDAO().listarUm(usuario.getId());
     String dataVenda = formatter.format(date);
     double valorTotal = 0;
 
@@ -37,7 +36,7 @@ public class VendaDAO {
     Venda v = new Venda();
     v.setValorTotal(valorTotal);
     v.setDataVenda(dataVenda);
-    v.setFkEnderecoId(e.getId());
+    v.setFkEnderecoId(fkEnderecoId);
     v.setFkUsuarioId(usuario.getId());
     v.setFkFormaPagamentoId(fkFormaPagamentoId);
 

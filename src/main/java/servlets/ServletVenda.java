@@ -73,7 +73,7 @@ public class ServletVenda extends ServletPermissoes {
     ProdutoVendaDAO pvdao = new ProdutoVendaDAO();
 
     try {
-      Venda v = vdao.buildar(usuarioLogado(req), produtosList, jsonObject.getInt("fkFormaPagamentoId"));
+      Venda v = vdao.buildar(usuarioLogado(req), produtosList, jsonObject.getInt("fkFormaPagamentoId"), jsonObject.getInt("fkEnderecoId"));
       int fkVendaId = vdao.adicionar(v);
 
       for (Produto produto: produtosList) {
