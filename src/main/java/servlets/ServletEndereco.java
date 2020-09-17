@@ -19,15 +19,12 @@ public class ServletEndereco extends ServletPermissoes {
       Endereco.class, new EnderecoDAO(), req, resp
     );
     Usuario u = usuarioLogado(req);
-    String id = String.valueOf(u.getId());
+    int id = u.getId();
 
-    if (isIndex(u, id)) {
-      crud.index();
-    } else if (u.isAdmin() || isUserInParams(u, id)) {
-      crud.show(Integer.parseInt(id));
+    if (req.getParameter("id") != null) {
+      crud.show(Integer.parseInt(req.getParameter("id")));
     } else {
-      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      return;
+      crud.index(id);
     }
   }
 
