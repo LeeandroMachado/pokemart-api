@@ -51,7 +51,12 @@ public class EnderecoDAO implements ICrud<Endereco> {
 
   @Override
   public List<Endereco> listar(int fk) throws SQLException {
-    return listar();
+    String query = "SELECT * FROM Enderecos WHERE fk_usuario_id = ?";
+
+    PreparedStatement st = con.prepareStatement(query);
+    st.setInt(1, fk);
+
+    return buscar(st);
   }
 
   @Override
