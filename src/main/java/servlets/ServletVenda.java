@@ -46,7 +46,7 @@ public class ServletVenda extends ServletPermissoes {
     }
 
     if (req.getParameter(ID_PARAMETER) == null) {
-      notas = vdaom.listar();
+      notas = vdaom.listar(u.getId());
       output.println(parser.toJson(notas));
     } else {
       nota = vdaom.listarUm(Integer.parseInt(req.getParameter(ID_PARAMETER)));

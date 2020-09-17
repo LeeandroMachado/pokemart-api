@@ -25,8 +25,8 @@ public class VendaDAOMongo {
     this.collection = this.cm.getMongoDatabase().getCollection(COLLECTION_NAME);
   }
 
-  public List<Document> listar() {
-    FindIterable<Document> result = this.collection.find();
+  public List<Document> listar(int id) {
+    FindIterable<Document> result = this.collection.find(eq("compra_id", id));
     MongoCursor<Document> cursor = result.iterator();
     List<Document> list = new ArrayList<Document>();
 
