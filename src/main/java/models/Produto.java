@@ -14,6 +14,17 @@ public class Produto {
 	private double preco;
 	@Expose
   private int qtdEstoque;
+	@Expose
+	private int qtd;
+
+	public int getQtd() {
+		return this.qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
+	}
+
 
 	public int getId() {
 		return this.id;

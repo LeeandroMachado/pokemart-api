@@ -82,7 +82,7 @@ public class VendaDAOMongo {
       prod.append("nome", produto.getNome());
       prod.append("peso", produto.getPeso());
       prod.append("valor", produto.getPreco());
-
+      prod.append("qtd", produto.getQtd());
       produtos.add(prod);
     }
 
