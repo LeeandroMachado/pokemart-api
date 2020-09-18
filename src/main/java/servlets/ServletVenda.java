@@ -78,7 +78,7 @@ public class ServletVenda extends ServletPermissoes {
         pvdao.cadastrar(pv);
       }
 
-      vdaom.cadastrar(v);
+      vdaom.cadastrar(v, produtosList);
 
       response = "Sucesso";
     } catch (ParseException e) {

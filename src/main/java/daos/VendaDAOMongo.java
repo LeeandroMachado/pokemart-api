@@ -51,12 +51,11 @@ public class VendaDAOMongo {
     return list.get(0);
   }
 
-  public void cadastrar(Venda v) {
+  public void cadastrar(Venda v, List<Produto> produtos) {
     VendaDAO vdao = new VendaDAO();
 
     try {
       Endereco e = vdao.getEndereco(v.getId());
-      List<Produto> produtos = vdao.getProdutos(v.getId());
       Usuario u = vdao.getCliente(v.getId());
 
       this.collection.insertOne(buildar(v, e, produtos, u));
@@ -81,7 +80,7 @@ public class VendaDAOMongo {
       prod.append("nome", produto.getNome());
       prod.append("peso", produto.getPeso());
       prod.append("valor", produto.getPreco());
-      prod.append("qtd", (int) (v.getValorTotal() / produto.getPreco()));
+      prod.append("qtd", produto.getQtd());
       produtos.add(prod);
     }
 
