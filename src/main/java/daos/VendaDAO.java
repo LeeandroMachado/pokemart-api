@@ -30,7 +30,7 @@ public class VendaDAO {
     double valorTotal = 0;
 
     for (Produto produto : produtos) {
-      valorTotal += produto.getPreco();
+      valorTotal += produto.getPreco() * produto.getQtd();
     }
 
     Venda v = new Venda();

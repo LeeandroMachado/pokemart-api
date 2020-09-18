@@ -69,16 +69,16 @@ public class ServletVenda extends ServletPermissoes {
 
     try {
       Venda v = vdao.buildar(usuarioLogado(req), produtosList, jsonObject.getInt("fkFormaPagamentoId"), jsonObject.getInt("fkEnderecoId"));
-      int fkVendaId = vdao.adicionar(v);
+      v.setId(vdao.adicionar(v));
 
       for (Produto produto: produtosList) {
         ProdutoVenda pv = new ProdutoVenda();
         pv.setFkProdutoId(produto.getId());
-        pv.setFkVendaId(fkVendaId);
+        pv.setFkVendaId(v.getId());
         pvdao.cadastrar(pv);
       }
 
-      vdaom.cadastrar(fkVendaId);
+      vdaom.cadastrar(v);
 
       response = "Sucesso";
     } catch (ParseException e) {

@@ -51,14 +51,13 @@ public class VendaDAOMongo {
     return list.get(0);
   }
 
-  public void cadastrar(int idVenda) {
+  public void cadastrar(Venda v) {
     VendaDAO vdao = new VendaDAO();
 
     try {
-      Venda v = vdao.getVenda(idVenda);
-      Endereco e = vdao.getEndereco(idVenda);
-      List<Produto> produtos = vdao.getProdutos(idVenda);
-      Usuario u = vdao.getCliente(idVenda);
+      Endereco e = vdao.getEndereco(v.getId());
+      List<Produto> produtos = vdao.getProdutos(v.getId());
+      Usuario u = vdao.getCliente(v.getId());
 
       this.collection.insertOne(buildar(v, e, produtos, u));
     } catch (SQLException err) {
@@ -82,7 +81,7 @@ public class VendaDAOMongo {
       prod.append("nome", produto.getNome());
       prod.append("peso", produto.getPeso());
       prod.append("valor", produto.getPreco());
-      prod.append("qtd", produto.getQtd());
+      prod.append("qtd", (int) (v.getValorTotal() / produto.getPreco()));
       produtos.add(prod);
     }
 

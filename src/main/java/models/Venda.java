@@ -1,6 +1,7 @@
 package models;
 
 import com.google.gson.annotations.Expose;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Venda {
 	@Expose
@@ -74,4 +75,8 @@ public class Venda {
 		this.fkUsuarioId = fkUsuarioId;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
