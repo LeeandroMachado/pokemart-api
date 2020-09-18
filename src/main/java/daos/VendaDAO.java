@@ -27,7 +27,7 @@ public class VendaDAO {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date date = new Date();
     String dataVenda = formatter.format(date);
-    double valorTotal = 0;
+    double valorTotal = 19.99;
 
     for (Produto produto : produtos) {
       valorTotal += produto.getPreco() * produto.getQtd();
