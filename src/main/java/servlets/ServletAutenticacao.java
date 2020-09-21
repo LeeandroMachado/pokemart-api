@@ -25,10 +25,10 @@ public class ServletAutenticacao extends HttpServlet {
       response = auth.autenticar(req);
     } catch (SQLException e) {
       System.out.println("ERRO: " + e.getMessage());
-      resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     } catch (Exception e) {
       System.out.println("ERRO: " + e.getMessage());
-      resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 
     output.println(response);
