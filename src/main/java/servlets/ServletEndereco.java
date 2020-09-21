@@ -36,14 +36,9 @@ public class ServletEndereco extends ServletPermissoes {
     Usuario u = usuarioLogado(req);
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Endereco e = parser.fromJson(req.getReader(), Endereco.class);
-    String id = String.valueOf(e.getFkUsuarioId());
 
-    if (u.isAdmin() || isUserInParams(u, id)) {
-      crud.create(e);
-    } else {
-      resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      return;
-    }
+    e.setFkUsuarioId(u.getId());
+    crud.create(e);
   }
 
   @Override
