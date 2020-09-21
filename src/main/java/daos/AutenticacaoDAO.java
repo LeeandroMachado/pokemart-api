@@ -24,7 +24,7 @@ public class AutenticacaoDAO {
     this.con = new ConexaoBanco().getConnection();
   }
 
-  public String autenticar(HttpServletRequest req) throws IOException, SQLException {
+  public String autenticar(HttpServletRequest req) throws IOException, SQLException, Exception {
     Usuario u;
     Gson parser = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     Autenticacao auth = parser.fromJson(req.getReader(), Autenticacao.class);
@@ -51,15 +51,14 @@ public class AutenticacaoDAO {
       if (BCrypt.checkpw(auth.getSenha(), new String(u.getSenha()))) {
         token = JWT.encode(String.valueOf(u.getId()), ISSUER, SUBJECT, TTL);
         u.setToken(token);
-
-        return parser.toJson(u);
       } else {
-        return "Senha inválida";
+        throw new Exception("Senha inválida");
       }
+
+      con.close();
+      return parser.toJson(u);
+    } else {
+      throw new Exception("Usuário não existe");
     }
-
-    con.close();
-
-    return "Usuário não existe";
   }
 }
